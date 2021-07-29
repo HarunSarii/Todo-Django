@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h2>Todo List</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Add">
+</form>
+
+<ul>
+    {% for todo in todos %}
+    {% if todo.completed %}
+    <a href="{% url 'todo-update' todo.id %}">
+        <li><del>{{todo}}</del></li>
+    </a>
+    {% else %}
+    <a href="{% url 'todo-update' todo.id %}">
+        <li>{{todo}}</li>
+    </a>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock content %}
